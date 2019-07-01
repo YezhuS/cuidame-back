@@ -9,7 +9,7 @@ const router = express.Router();
 //Get Posts
 router.route('/')
   .get(function (req, res){
-    Post.find().exec(function(err, results){
+    Post.find().populate('user').exec(function(err, results){
       if(err){
         throw err
       }

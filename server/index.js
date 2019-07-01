@@ -7,6 +7,7 @@ const app = express ();
 
 //Middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 const db = mongoose.connection;
@@ -21,9 +22,11 @@ mongoose.connect('mongodb+srv://ddaw-test:smEwneuETioTbV01@cluster0-hmnfa.mongod
 
 const posts = require('./routes/api/posts');
 const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 
 app.use('/api/posts', posts);
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 
 const port = process.env.PORT || 5000;

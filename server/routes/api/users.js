@@ -24,20 +24,23 @@ router.route('/')
     let userData = req.body
 
     let userObj = new User({
-      firstName: userData.firstName,
-      lastName: userData.lastName,
+      // firstName: userData.firstName,
+      // lastName: userData.lastName,
       user: userData.user,
       password: Base64.encode(userData.password),
-      address: userData.address,
+      //address: userData.address,
       email: userData.email,
-      phone: userData.phone,
-      role: userData.role,
-      userID: userData.userID,
-      enabled: userData.enabled
+      // phone: userData.phone,
+      // role: userData.role,
+      // photo: userData.photo,
+      // userID: userData.userID,
+      // enabled: userData.enabled
     }) 
 
     userObj.save(function (err) {
+      console.log(err)
       if (err) {
+        
         if(err.code === 11000){
           res.status(400)
           res.send('El email asociado ya está en uso, pichita mía')
@@ -47,9 +50,13 @@ router.route('/')
           throw err
         }
       }
+      if(!err){
+        res.status(201)
+        res.json(userObj.toJSON())
 
-    res.status(201)
-    res.json(userObj.toJSON())
+      }
+
+  
     })
   
 })
@@ -107,6 +114,7 @@ router.route('/:id')
         result.enabled = userData.enabled
         result.address = userData.address
         result.role = userData.role
+        result.photo = userData.photo
         result.userID = userData.userID
         result.phone = userData.phone
 
