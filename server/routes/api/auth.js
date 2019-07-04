@@ -3,37 +3,33 @@ const Base64 = require('js-base64').Base64;
 const User = require('../../models/user')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const randtoken = require('rand-token')
+// const randtoken = require('rand-token')
 
-let refreshTokens = {}
+// let refreshTokens = {}
 let SECRET = "SECRETO_PARA_ENCRIPTACION"
 
 //signUp
-router.route('/signUp')
-  .post(function(req, res) {
-    let userData = req.body
-    console.log(user.data)
-    let newUser = new User({
-      email: userData.email,
-      password: Base64.encode(userData.password)
-    })
-    newUser.save(err => {
-      if (err) {
-        res.status(400)
-        res.send('Algo falló, amigo') 
-        } 
-        if(!err){
-          res.status(201)
-      jwt.sign(newUser, SECRET , {expiresIn: '30d'}, (err, token) => {
-        res.json({token: token})
-      })
-        }
-      
-
-     
-
-    })
-  })
+// router.route('/signUp')
+//   .post(function(req, res) {
+//     let userData = req.body
+//     console.log(user.data)
+//     let newUser = new User({
+//       email: userData.email,
+//       password: Base64.encode(userData.password)
+//     })
+//     newUser.save(err => {
+//       if (err) {
+//         res.status(400)
+//         res.send('Algo falló, amigo') 
+//         } 
+//         if(!err){
+//           res.status(201)
+//       jwt.sign(newUser, SECRET , {expiresIn: '30d'}, (err, token) => {
+//         res.json({token: token})
+//       })
+//         }
+//     })
+//   })
 
 //login
 router.route('/login')

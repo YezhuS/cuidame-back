@@ -24,17 +24,17 @@ router.route('/')
     let userData = req.body
 
     let userObj = new User({
-      // firstName: userData.firstName,
-      // lastName: userData.lastName,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
       user: userData.user,
       password: Base64.encode(userData.password),
-      //address: userData.address,
+      address: userData.address,
       email: userData.email,
-      // phone: userData.phone,
-      // role: userData.role,
-      // photo: userData.photo,
-      // userID: userData.userID,
-      // enabled: userData.enabled
+      phone: userData.phone,
+      role: userData.role,
+      photo: userData.photo,
+      userID: userData.userID,
+      enabled: userData.enabled
     }) 
 
     userObj.save(function (err) {
@@ -83,7 +83,7 @@ router.route('/:id')
 
     if(result){
       let userJSON = result.toJSON()
-      delete userJSON.password //nos sirve para cuando pidamos esta Api no nos salga la contraseña (aunque esté encriptada) 
+      //delete userJSON.password //nos sirve para cuando pidamos esta Api no nos salga la contraseña (aunque esté encriptada) 
 
       res.json(userJSON);
       }
@@ -110,12 +110,12 @@ router.route('/:id')
         result.lastName = userData.lastName
         result.user = userData.user
         result.email = userData.email
-        result.password = Base64.decode(userData.password)
+        result.password = Base64.encode(userData.password)
         result.enabled = userData.enabled
         result.address = userData.address
         result.role = userData.role
         result.photo = userData.photo
-        result.userID = userData.userID
+        //result.userID = userData.userID
         result.phone = userData.phone
 
         result.save(function(err){
